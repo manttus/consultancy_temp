@@ -4,7 +4,7 @@ import { authorization } from "../middleware/authorization.js";
 
 const router = express.Router();
 
-router.post("/isCompleted", authorization, async (req, res) => {
+router.get("/isCompleted", authorization, async (req, res) => {
   const { email } = req.user;
   try {
     const user = await User.findOne({ email });
@@ -15,42 +15,18 @@ router.post("/isCompleted", authorization, async (req, res) => {
       {
         $project: {
           _id: 0,
-          completedFields: {
+          emptyStringFields: {
             $size: {
               $filter: {
                 input: { $objectToArray: "$$ROOT" },
                 as: "field",
-                cond: {
-                  $or: [
-                    { $eq: ["$$field.v", ""] },
-                    { $eq: ["$$field.v", null] },
-                  ],
-                },
+                cond: { $eq: ["$$field.v", ""] },
               },
             },
           },
         },
       },
-      {
-        $group: {
-          _id: null,
-          totalDocuments: { $sum: 1 },
-          totalCompletedFields: { $sum: "$completedFields" },
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          completionPercentage: {
-            $multiply: [
-              { $divide: ["$totalCompletedFields", "$totalDocuments"] },
-              100,
-            ],
-          },
-        },
-      },
     ]);
-
     return res
       .status(200)
       .send({ percentage: percentage[0].completionPercentage });
