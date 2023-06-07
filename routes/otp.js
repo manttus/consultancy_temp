@@ -13,7 +13,12 @@ router.post("/sendOtp", async (req, res) => {
       return res.status(400).send({ message: "Email already exists" });
     }
     const otp = await OTP.findOne({ email, status: "pending" });
-    if (otp) {
+    const isExpired = otp.expiredAt < new Date();
+    if (isExpired) {
+      otp.status = "expired";
+      await otp.save();
+    }
+    if (otp && !isExpired) {
       return res.status(400).send({ message: "OTP already sent" });
     } else {
       const generatedOTP = Math.floor(100000 + Math.random() * 900000);
