@@ -13,7 +13,7 @@ router.post("/sendOtp", async (req, res) => {
       return res.status(400).send({ message: "Email already exists" });
     }
     const otp = await OTP.findOne({ email, status: "pending" });
-    const isExpired = otp.expiredAt < new Date();
+    const isExpired = otp ? new Date() > otp.expiredAt : false;
     if (isExpired) {
       otp.status = "expired";
       await otp.save();
@@ -35,6 +35,7 @@ router.post("/sendOtp", async (req, res) => {
       return res.status(400).send({ message: "Failed to send OTP" });
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).send({ message: "Failed to send OTP" });
   }
 });
