@@ -11,26 +11,15 @@ router.get("/isCompleted", authorization, async (req, res) => {
     if (!user) {
       return res.status(400).send({ message: "User not found" });
     }
-    const percentage = await User.aggregate([
-      {
-        $project: {
-          _id: 0,
-          emptyStringFields: {
-            $size: {
-              $filter: {
-                input: { $objectToArray: "$$ROOT" },
-                as: "field",
-                cond: { $eq: ["$$field.v", ""] },
-              },
-            },
-          },
-        },
-      },
-    ]);
-    return res
-      .status(200)
-      .send({ percentage: percentage[0].completionPercentage });
+    const emptyFieldsCount = Object.values(user._doc).filter(
+      (value) => value === ""
+    ).length;
+    const totalFieldsCount = Object.keys(user._doc).length;
+    const completedPercentage =
+      ((totalFieldsCount - emptyFieldsCount) / totalFieldsCount) * 100;
+    return res.status(200).send({ percentage: completedPercentage.toFixed(2) });
   } catch (err) {
+    console.log(err);
     return res.status(500).send({ message: "Failed to fetch user" });
   }
 });
