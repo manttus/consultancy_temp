@@ -1,6 +1,6 @@
 import Blog from "../../model/blog.js";
 
-export const getRecentBlogs = async (res, req) => {
+export const getRecentBlogs = async (req, res) => {
   try {
     const blogs = await Blog.find({}).sort({ createdAt: -1 }).limit(5);
     return res.status(200).send({ blogs });
