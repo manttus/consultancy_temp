@@ -1,5 +1,6 @@
 import OTP from "../../model/otp.js";
 import { sendMail } from "../../utils/sendMail.js";
+import User from "../../model/user.js";
 
 export const sendOtp = async (req, res) => {
   try {
