@@ -452,7 +452,7 @@ paths:
                   message:
                     type: string
                     example: Server Error
-  /blog/recent:
+  /blog/recentBlog:
     get:
       tags:
         - Blogs
@@ -497,7 +497,7 @@ paths:
                   message:
                     type: string
                     example: Server Error
-  /blog/{Page}/{Limit}:
+  /blogs/{Page}/{Limit}:
     get:
       tags:
         - Blogs
