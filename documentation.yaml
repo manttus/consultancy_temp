@@ -1,0 +1,518 @@
+openapi: 3.0.3
+info:
+  title: Consultancy App
+  version: 1.0.11
+servers:
+  - url: https://consultancy-temp-service.onrender.com/api/
+tags:
+  - name: User
+    description: User endpoints
+  - name: OTP 
+    description: OTP endpoints
+  - name: Auth
+    description: Authentication endpoints
+  - name: Blogs
+    description: Blogs endpoints
+ 
+paths:
+  /user/isCompleted:
+    get:
+      tags: 
+        - User
+      summary: Get Profile Progress
+      parameters:
+        - name: Authorization
+          in: header
+          description: Access Token
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json: 
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Success
+                  percentage:
+                    type: string
+                    example: 77.77
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Invalid User
+        '401':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /user/profile:
+    get:
+      tags:
+        - User
+      summary: Get Profile Data
+      parameters:
+        - name: Authorization
+          in: header
+          description: Access Token
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json: 
+              schema:
+                properties:
+                  phone:
+                    type: string
+                    example: 9803822743
+                  address: 
+                    type: string
+                    example: Mandikhatar
+                  firstname:
+                    type: string
+                    example: Raymon
+                  lastname:
+                    type: string
+                    example: Raymon
+                  email:
+                    type: string
+                    example: basnetraymonn@gmail.com
+                  username: 
+                    type: string
+                    example: mantuu
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Invalid User
+        '401':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /user/update:
+    put:
+      tags:
+        - User
+      summary: Update User Data
+      parameters:
+        - name: Authorization
+          in: header
+          description: Access Token
+          required: true
+          schema: 
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                firstname:
+                  title: firstname
+                  example: Raymon
+                lastname:
+                  title: lastname
+                  example: Basnet
+                email:
+                  title: email
+                  example: basnetraymonn@gmail.com
+                password:
+                  title: password
+                  example: 73-55-608Cyka
+                username:
+                  title: username
+                  example: mantuu
+            
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json: 
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: User Updated
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Invalid User
+        '401':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /otp/sendOtp:
+    post:
+      tags:
+        - OTP
+      summary: Send OTP
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json: 
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Success
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Invalid User
+        '429':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Otp already exists
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /otp/verifyOtp:
+    post:
+      tags:
+        - OTP
+      summary: Verifiy OTP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  title: email
+                  example: basnetraymonn@gmail.com
+                otp:
+                  title: otp
+                  example: 657345
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json: 
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: OTP verified successfully
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Invalid OTP
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                firstname:
+                  title: firstname
+                  example: Raymon
+                lastname:
+                  title: lastname
+                  example: Basnet
+                email:
+                  title: email
+                  example: basnetraymonn@gmail.com
+                password:
+                  title: password
+                  example: 73-55-608Cyka
+                username:
+                  title: username
+                  example: mantuu
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json: 
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: User registered successfully
+                  accessToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpdGVzaGxhbWE1QGdtYWlsLmNvbSIsImlhdCI6MTY4NjI5NDMzMCwiZXhwIjoxNjg2Mjk3OTMwfQ.Qt3YG6yGzYjFijhuq90Asl_pVJynyXaJO264Kh11Rvs
+                  refreshToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpdGVzaGxhbWE1QGdtYWlsLmNvbSIsImlhdCI6MTY4NjI5NDMzMCwiZXhwIjoxNjg2ODk5MTMwfQ.aGB8kXSdanDIYqpTNyJEXffG41D9qrs0NL5TN6lu4Ug
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Invalid User
+        '401':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  title: email
+                  example: basnetraymonn@gmail.com
+                password:
+                  title: password
+                  example: qwerty123456
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json: 
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Login Succesfull
+                  accessToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpdGVzaGxhbWE1QGdtYWlsLmNvbSIsImlhdCI6MTY4NjI5NDMzMCwiZXhwIjoxNjg2Mjk3OTMwfQ.Qt3YG6yGzYjFijhuq90Asl_pVJynyXaJO264Kh11Rvs
+                  refreshToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpdGVzaGxhbWE1QGdtYWlsLmNvbSIsImlhdCI6MTY4NjI5NDMzMCwiZXhwIjoxNjg2ODk5MTMwfQ.aGB8kXSdanDIYqpTNyJEXffG41D9qrs0NL5TN6lu4Ug
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Invalid User
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /blog/recent:
+    get:
+      tags:
+        - Blogs
+      summary: Recent Blogs
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json: 
+              schema:
+                properties:
+                  title:
+                    type: string
+                    example: Test Blog
+                  description:
+                    type: string
+                    example: Test Description
+                  image:
+                    type: string
+                    example: https://image.png
+                  postedBy:
+                    type: string
+                    example: Raymon Basnet
+                  createAt:
+                    type: string
+                    example: 2023-06-09
+        '401':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /blog/{Page}/{Limit}:
+    get:
+      tags:
+        - Blogs
+      summary: All Blogs
+      parameters:
+        - name: Limit
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Page
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json: 
+              schema:
+                type: array
+                items:
+                  properties:
+                    title:
+                      type: string
+                      example: Test Blog
+                    description:
+                      type: string
+                      example: Test Description
+                    image:
+                      type: string
+                      example: https://image.png
+                    postedBy:
+                      type: string
+                      example: Raymon Basnet
+                    createAt:
+                      type: string
+                      example: 2023-06-09
+        '401':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  
+                    
+        
