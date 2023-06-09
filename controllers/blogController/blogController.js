@@ -10,7 +10,7 @@ export const getRecentBlogs = async (req, res) => {
   }
 };
 
-export const getBlog = async (res, req) => {
+export const getBlog = async (req, res) => {
   try {
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
