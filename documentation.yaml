@@ -7,17 +7,17 @@ servers:
 tags:
   - name: User
     description: User endpoints
-  - name: OTP 
+  - name: OTP
     description: OTP endpoints
   - name: Auth
     description: Authentication endpoints
   - name: Blogs
     description: Blogs endpoints
- 
+
 paths:
   /user/isCompleted:
     get:
-      tags: 
+      tags:
         - User
       summary: Get Profile Progress
       parameters:
@@ -25,13 +25,13 @@ paths:
           in: header
           description: Access Token
           required: true
-          schema: 
+          schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Success
           content:
-            application/json: 
+            application/json:
               schema:
                 properties:
                   message:
@@ -40,7 +40,7 @@ paths:
                   percentage:
                     type: string
                     example: 77.77
-        '400':
+        "400":
           description: Error
           content:
             application/json:
@@ -49,7 +49,7 @@ paths:
                   message:
                     type: string
                     example: Invalid User
-        '401':
+        "401":
           description: Error
           content:
             application/json:
@@ -58,7 +58,7 @@ paths:
                   message:
                     type: string
                     example: Unauthorized
-        '500':
+        "500":
           description: Error
           content:
             application/json:
@@ -77,19 +77,19 @@ paths:
           in: header
           description: Access Token
           required: true
-          schema: 
+          schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Success
           content:
-            application/json: 
+            application/json:
               schema:
                 properties:
                   phone:
                     type: string
                     example: 9803822743
-                  address: 
+                  address:
                     type: string
                     example: Mandikhatar
                   firstname:
@@ -101,10 +101,10 @@ paths:
                   email:
                     type: string
                     example: basnetraymonn@gmail.com
-                  username: 
+                  username:
                     type: string
                     example: mantuu
-        '400':
+        "400":
           description: Error
           content:
             application/json:
@@ -113,7 +113,7 @@ paths:
                   message:
                     type: string
                     example: Invalid User
-        '401':
+        "401":
           description: Error
           content:
             application/json:
@@ -122,7 +122,7 @@ paths:
                   message:
                     type: string
                     example: Unauthorized
-        '500':
+        "500":
           description: Error
           content:
             application/json:
@@ -141,7 +141,7 @@ paths:
           in: header
           description: Access Token
           required: true
-          schema: 
+          schema:
             type: string
       requestBody:
         required: true
@@ -164,18 +164,18 @@ paths:
                 username:
                   title: username
                   example: mantuu
-            
+
       responses:
-        '200':
+        "200":
           description: Success
           content:
-            application/json: 
+            application/json:
               schema:
                 properties:
                   message:
                     type: string
                     example: User Updated
-        '400':
+        "400":
           description: Error
           content:
             application/json:
@@ -184,7 +184,7 @@ paths:
                   message:
                     type: string
                     example: Invalid User
-        '401':
+        "401":
           description: Error
           content:
             application/json:
@@ -193,7 +193,7 @@ paths:
                   message:
                     type: string
                     example: Unauthorized
-        '500':
+        "500":
           description: Error
           content:
             application/json:
@@ -208,16 +208,16 @@ paths:
         - OTP
       summary: Send OTP
       responses:
-        '200':
+        "200":
           description: Success
           content:
-            application/json: 
+            application/json:
               schema:
                 properties:
                   message:
                     type: string
                     example: Success
-        '400':
+        "400":
           description: Error
           content:
             application/json:
@@ -226,7 +226,7 @@ paths:
                   message:
                     type: string
                     example: Invalid User
-        '429':
+        "429":
           description: Error
           content:
             application/json:
@@ -235,7 +235,7 @@ paths:
                   message:
                     type: string
                     example: Otp already exists
-        '500':
+        "500":
           description: Error
           content:
             application/json:
@@ -263,16 +263,16 @@ paths:
                   example: 657345
                   type: string
       responses:
-        '200':
+        "200":
           description: Success
           content:
-            application/json: 
+            application/json:
               schema:
                 properties:
                   message:
                     type: string
                     example: OTP verified successfully
-        '400':
+        "400":
           description: Error
           content:
             application/json:
@@ -281,7 +281,7 @@ paths:
                   message:
                     type: string
                     example: Invalid OTP
-        '500':
+        "500":
           description: Error
           content:
             application/json:
@@ -317,10 +317,10 @@ paths:
                   title: username
                   example: mantuu
       responses:
-        '200':
+        "200":
           description: Success
           content:
-            application/json: 
+            application/json:
               schema:
                 properties:
                   message:
@@ -332,7 +332,7 @@ paths:
                   refreshToken:
                     type: string
                     example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpdGVzaGxhbWE1QGdtYWlsLmNvbSIsImlhdCI6MTY4NjI5NDMzMCwiZXhwIjoxNjg2ODk5MTMwfQ.aGB8kXSdanDIYqpTNyJEXffG41D9qrs0NL5TN6lu4Ug
-        '400':
+        "400":
           description: Error
           content:
             application/json:
@@ -341,16 +341,7 @@ paths:
                   message:
                     type: string
                     example: Invalid User
-        '401':
-          description: Error
-          content:
-            application/json:
-              schema:
-                properties:
-                  message:
-                    type: string
-                    example: Unauthorized
-        '500':
+        "500":
           description: Error
           content:
             application/json:
@@ -377,10 +368,10 @@ paths:
                   title: password
                   example: qwerty123456
       responses:
-        '200':
+        "200":
           description: Success
           content:
-            application/json: 
+            application/json:
               schema:
                 properties:
                   message:
@@ -392,7 +383,7 @@ paths:
                   refreshToken:
                     type: string
                     example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpdGVzaGxhbWE1QGdtYWlsLmNvbSIsImlhdCI6MTY4NjI5NDMzMCwiZXhwIjoxNjg2ODk5MTMwfQ.aGB8kXSdanDIYqpTNyJEXffG41D9qrs0NL5TN6lu4Ug
-        '400':
+        "400":
           description: Error
           content:
             application/json:
@@ -401,7 +392,58 @@ paths:
                   message:
                     type: string
                     example: Invalid User
-        '500':
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /auth/token:
+    post:
+      tags:
+        - Auth
+      summary: Regenerate access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                token:
+                  title: token
+                  example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpdGVzaGxhbWE1QGdtYWlsLmNvbSIsImlhdCI6MTY4NjI5NzI1OCwiZXhwIjoxNjg2OTAyMDU4fQ.IZQc-VV_vnJdIajZDiOge8563ibN3KYOLmPqzj9up8s
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  accessToken:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpdGVzaGxhbWE1QGdtYWlsLmNvbSIsImlhdCI6MTY4NjI5NDMzMCwiZXhwIjoxNjg2Mjk3OTMwfQ.Qt3YG6yGzYjFijhuq90Asl_pVJynyXaJO264Kh11Rvs
+        "400":
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Invalid token
+        "403":
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Token expired
+        "500":
           description: Error
           content:
             application/json:
@@ -416,10 +458,10 @@ paths:
         - Blogs
       summary: Recent Blogs
       responses:
-        '200':
+        "200":
           description: Success
           content:
-            application/json: 
+            application/json:
               schema:
                 properties:
                   title:
@@ -437,7 +479,7 @@ paths:
                   createAt:
                     type: string
                     example: 2023-06-09
-        '401':
+        "401":
           description: Error
           content:
             application/json:
@@ -446,7 +488,7 @@ paths:
                   message:
                     type: string
                     example: Unauthorized
-        '500':
+        "500":
           description: Error
           content:
             application/json:
@@ -472,10 +514,10 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Success
           content:
-            application/json: 
+            application/json:
               schema:
                 type: array
                 items:
@@ -495,7 +537,7 @@ paths:
                     createAt:
                       type: string
                       example: 2023-06-09
-        '401':
+        "401":
           description: Error
           content:
             application/json:
@@ -504,7 +546,7 @@ paths:
                   message:
                     type: string
                     example: Unauthorized
-        '500':
+        "500":
           description: Error
           content:
             application/json:
@@ -513,6 +555,3 @@ paths:
                   message:
                     type: string
                     example: Server Error
-  
-                    
-        
