@@ -8,6 +8,13 @@ const blogSchema = new mongoose.Schema({
     maxlength: 160,
     minlength: 3,
   },
+  short_description: {
+    type: String,
+    trim: true,
+    required: true,
+    minlength: 3,
+    maxlength: 200,
+  },
   description: {
     type: String,
     trim: true,
@@ -19,9 +26,25 @@ const blogSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String,
   },
+  read_time: {
+    type: Number,
+    required: true,
+  },
   postedBy: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
+    type: String,
+    required: true,
+  },
+  views: {
+    type: Number,
+    default: 0,
+  },
+  tag: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
   },
   created: {
     type: Date,
