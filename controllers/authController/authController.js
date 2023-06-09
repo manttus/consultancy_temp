@@ -50,12 +50,12 @@ export const register = async (req, res) => {
     const accessToken = generateToken(
       process.env.ACCESS_TOKEN_SECRET,
       email,
-      "1h"
+      "1m"
     );
     const refreshToken = generateToken(
       process.env.REFRESH_TOKEN_SECRET,
       email,
-      "7d"
+      "5m"
     );
 
     return res.status(200).send({
@@ -81,12 +81,12 @@ export const login = async (req, res) => {
     const accessToken = generateToken(
       process.env.ACCESS_TOKEN_SECRET,
       email,
-      "1h"
+      "1m"
     );
     const refreshToken = generateToken(
       process.env.REFRESH_TOKEN_SECRET,
       email,
-      "7d"
+      "5m"
     );
     return res
       .status(200)
