@@ -5,7 +5,7 @@ import { generateToken } from "../../helper/generateToken.js";
 export const regenerate = async (req, res) => {
   const { token } = req.body;
   if (!token) {
-    return res.status(400).send({ message: "Invalid data" });
+    return res.status(400).send({ message: "Invalid token" });
   }
   try {
     const user = jwt.verify(
