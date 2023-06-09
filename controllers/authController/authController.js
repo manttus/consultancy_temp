@@ -18,7 +18,7 @@ export const regenerate = async (req, res) => {
         const accessToken = generateToken(
           process.env.ACCESS_TOKEN_SECRET,
           user.email,
-          "1h"
+          "1m"
         );
         return res.status(200).send({ accessToken });
       }
