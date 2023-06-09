@@ -7,6 +7,6 @@ import {
 const router = express.Router();
 
 router.get("/recentBlog", getRecentBlogs);
-router.get("/blog/:page/:limit", getBlog);
+router.get("/blogs/:page/:limit", getBlog);
 
 export default router;
