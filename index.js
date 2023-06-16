@@ -36,7 +36,7 @@ mongoose.connect(mongo_uri).then(() => {
 });
 
 app.use("/api", (req, res) => {
-  res.send({ message: "Wrong Enddpoint" });
+  res.send({ message: "Wrong Endpoint" });
 });
 
 app.listen(port, () => {
