@@ -74,7 +74,7 @@ paths:
                     question:
                       type: string
                       example: Test Blog
-                    description:
+                    answer:
                       type: string
                       example: Test Description
                     createdAt:
