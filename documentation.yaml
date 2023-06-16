@@ -17,8 +17,39 @@ tags:
     description: FAQ endpoints
   - name: Course
     description: Course endpoints
+  - name: Location
+    description: Location endpoints
 
 paths:
+  /location/getLocation:
+    get:
+      tags:
+        - Location
+      summary: Get Location
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    _id:
+                      type: string
+                      example: 648c221288768c280798da6f
+                    location:
+                      type: string
+                      example: Kathmandu
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
   /course/getCourse:
     get:
       tags:
@@ -74,7 +105,7 @@ paths:
                     question:
                       type: string
                       example: Test Blog
-                    answer:
+                    description:
                       type: string
                       example: Test Description
                     createdAt:
