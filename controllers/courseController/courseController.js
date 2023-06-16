@@ -9,6 +9,19 @@ export const getCourse = async (req, res) => {
   }
 };
 
+export const searchCourses = async (req, res) => {
+  const { Search } = req.params;
+  try {
+    const courses = await Course.find({
+      course: { $regex: Search, $options: "i" },
+    });
+    return res.status(200).send({ data: courses });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ message: "Server Error" });
+  }
+};
+
 export const addCourse = async (req, res) => {
   const { location, college, course, degree } = req.body;
   if (!location || !college || !course || !degree) {
