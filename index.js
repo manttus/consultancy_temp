@@ -7,6 +7,7 @@ import AuthRouter from "./routes/auth.js";
 import UserRouter from "./routes/user.js";
 import BlogRouter from "./routes/blog.js";
 import faqRouter from "./routes/faq.js";
+import locationRouter from "./routes/location.js";
 import courseRouter from "./routes/course.js";
 import YAML from "yamljs";
 import swaggerUi from "swagger-ui-express";
@@ -27,6 +28,7 @@ app.use("/api/user", UserRouter);
 app.use("/api/blog", BlogRouter);
 app.use("/api/faq", faqRouter);
 app.use("/api/course", courseRouter);
+app.use("/api/location", locationRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 mongoose.connect(mongo_uri).then(() => {
@@ -34,7 +36,7 @@ mongoose.connect(mongo_uri).then(() => {
 });
 
 app.use("/api", (req, res) => {
-  res.send({ message: "API is running" });
+  res.send({ message: "Wrong Enddpoint" });
 });
 
 app.listen(port, () => {
