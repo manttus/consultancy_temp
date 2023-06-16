@@ -22,6 +22,23 @@ export const searchCourses = async (req, res) => {
   }
 };
 
+export const filterCourse = async (req, res) => {
+  const { course, location } = req.body;
+  if (!course || !location)
+    return res.status(400).send({ message: "Invalid Fields" });
+  try {
+    const courses = await Course.find({
+      course: { $regex: course, $options: "i" },
+      location: { $regex: location, $options: "i" },
+    });
+
+    return res.status(200).send({ courses });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ message: "Server Error" });
+  }
+};
+
 export const addCourse = async (req, res) => {
   const { location, college, course, degree } = req.body;
   if (!location || !college || !course || !degree) {
