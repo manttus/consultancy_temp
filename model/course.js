@@ -12,7 +12,7 @@ const courseSchemaa = new mongoose.Schema({
   image: {
     type: String,
     default:
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.ul.ie%2F&psig=AOvVaw03SpLVrZbnnlDGpCrIOeKn&ust=1686989976494000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCPjTkcqtx_8CFQAAAAAdAAAAABAP",
+      "https://cdn.britannica.com/85/13085-050-C2E88389/Corpus-Christi-College-University-of-Cambridge-England.jpg",
   },
   course: {
     type: String,
