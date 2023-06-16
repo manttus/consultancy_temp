@@ -24,8 +24,6 @@ export const searchCourses = async (req, res) => {
 
 export const filterCourse = async (req, res) => {
   const { course, location } = req.body;
-  if (!course || !location)
-    return res.status(400).send({ message: "Invalid Fields" });
   try {
     const courses = await Course.find({
       course: { $regex: course, $options: "i" },
