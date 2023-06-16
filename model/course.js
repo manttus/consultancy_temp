@@ -11,7 +11,8 @@ const courseSchemaa = new mongoose.Schema({
   },
   image: {
     type: String,
-    default: "",
+    default:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.ul.ie%2F&psig=AOvVaw03SpLVrZbnnlDGpCrIOeKn&ust=1686989976494000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCPjTkcqtx_8CFQAAAAAdAAAAABAP",
   },
   course: {
     type: String,
