@@ -131,15 +131,6 @@ paths:
                     college:
                       type: string
                       example: Herald College Kathmandu
-        "400":
-          description: Error
-          content:
-            application/json:
-              schema:
-                properties:
-                  message:
-                    type: string
-                    example: Invalid Fields
         "500":
           description: Error
           content:
