@@ -13,8 +13,82 @@ tags:
     description: Authentication endpoints
   - name: Blogs
     description: Blogs endpoints
+  - name: FAQ
+    description: FAQ endpoints
+  - name: Course
+    description: Course endpoints
 
 paths:
+  /course/getCourse:
+    get:
+      tags:
+        - Course
+      summary: Get Courses
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    location:
+                      type: string
+                      example: Kathmandu
+                    degree:
+                      type: string
+                      example: undergraduate
+                    image:
+                      type: string
+                      example: https://brrrrr.jpg
+                    course:
+                      type: string
+                      example: Bachelors in Computer Science
+                    college:
+                      type: string
+                      example: Herald College Kathmandu
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /faq/getFaq:
+    get:
+      tags:
+        - FAQ
+      summary: Get FAQs
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    question:
+                      type: string
+                      example: Test Blog
+                    description:
+                      type: string
+                      example: Test Description
+                    createdAt:
+                      type: string
+                      example: 2022-10-20
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
   /user/isCompleted:
     get:
       tags:
