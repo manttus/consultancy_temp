@@ -17,15 +17,42 @@ tags:
     description: FAQ endpoints
   - name: Course
     description: Course endpoints
-  - name: Filter Data
-    description: Location endpoints
+  - name: Location & Filters
+    description: Location & Filter Endpoints
 
 paths:
+  /location/getCountries:
+    get:
+      tags:
+        - Location & Filters
+      summary: Get Countries Data
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    _id:
+                      example: 648c221288768c280798da6f
+                    country:
+                      example: Nepal
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
   /location/getFilters:
     get:
       tags:
-        - Filter Data
-      summary: Get Location
+        - Location & Filters
+      summary: Filter Data
       responses:
         "200":
           description: Success
@@ -51,6 +78,68 @@ paths:
                             example: 648c221288768c280798da6f
                           degree:
                             example: Bachelors in Computer Science
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /course/filterCourses:
+    post:
+      tags:
+        - Course
+      summary: Get Filtered Courses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                course:
+                  title: course
+                  example: Bachelors in Computer Science
+                  type: string
+                location:
+                  title: location
+                  example: Kathmandu
+                  type: string
+
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    location:
+                      type: string
+                      example: Kathmandu
+                    degree:
+                      type: string
+                      example: undergraduate
+                    image:
+                      type: string
+                      example: https://brrrrr.jpg
+                    course:
+                      type: string
+                      example: Bachelors in Computer Science
+                    college:
+                      type: string
+                      example: Herald College Kathmandu
+        "400":
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Invalid Fields
         "500":
           description: Error
           content:
@@ -98,7 +187,7 @@ paths:
                   message:
                     type: string
                     example: Server Error
-  /course/searchCourses/{Search}:
+  /course/{Search}:
     get:
       tags:
         - Course
