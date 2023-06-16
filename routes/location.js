@@ -1,11 +1,13 @@
 import express from "express";
 import {
-  getLocation,
+  getFilterData,
   addLocation,
+  addDegree,
 } from "../controllers/locationController/locationController.js";
 
 const router = express.Router();
-router.get("/getLocation", getLocation);
+router.get("/getFilters", getFilterData);
 router.post("/addLocation", addLocation);
+router.post("/addDegree", addDegree);
 
 export default router;
