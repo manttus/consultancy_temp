@@ -17,14 +17,14 @@ tags:
     description: FAQ endpoints
   - name: Course
     description: Course endpoints
-  - name: Location
+  - name: Filter Data
     description: Location endpoints
 
 paths:
-  /location/getLocation:
+  /location/getFilters:
     get:
       tags:
-        - Location
+        - Filter Data
       summary: Get Location
       responses:
         "200":
@@ -35,12 +35,22 @@ paths:
                 type: array
                 items:
                   properties:
-                    _id:
-                      type: string
-                      example: 648c221288768c280798da6f
-                    location:
-                      type: string
-                      example: Kathmandu
+                    locations:
+                      type: array
+                      items:
+                        properties:
+                          _id:
+                            example: 648c221288768c280798da6f
+                          location:
+                            example: Kathmandu
+                    degrees:
+                      type: array
+                      items:
+                        properties:
+                          _id:
+                            example: 648c221288768c280798da6f
+                          degree:
+                            example: Bachelors in Computer Science
         "500":
           description: Error
           content:
@@ -55,6 +65,50 @@ paths:
       tags:
         - Course
       summary: Get Courses
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    location:
+                      type: string
+                      example: Kathmandu
+                    degree:
+                      type: string
+                      example: undergraduate
+                    image:
+                      type: string
+                      example: https://brrrrr.jpg
+                    course:
+                      type: string
+                      example: Bachelors in Computer Science
+                    college:
+                      type: string
+                      example: Herald College Kathmandu
+        "500":
+          description: Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: Server Error
+  /course/{Search}:
+    get:
+      tags:
+        - Course
+      summary: Get Course Based on Path Parameter
+      parameters:
+        - name: Search
+          in: path
+          schema:
+            type: string
+          required: true
       responses:
         "200":
           description: Success
