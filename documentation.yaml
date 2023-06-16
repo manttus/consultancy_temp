@@ -98,7 +98,7 @@ paths:
                   message:
                     type: string
                     example: Server Error
-  /course/{Search}:
+  /course/searchCourses/{Search}:
     get:
       tags:
         - Course
