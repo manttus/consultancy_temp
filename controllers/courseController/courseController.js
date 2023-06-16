@@ -9,4 +9,21 @@ export const getCourse = async (req, res) => {
   }
 };
 
-export const addCourse = async (req, res) => {};
+export const addCourse = async (req, res) => {
+  const { location, college, course, degree } = req.body;
+  if (!location || !college || !course || !degree) {
+    return res.status(400).send({ message: "Bad Request" });
+  }
+
+  try {
+    new Course({
+      college,
+      course,
+      degree,
+      location,
+    }).save();
+    return res.status(200).send({ message: "Course Added" });
+  } catch (err) {
+    return res.status(500).send({ message: "Server Error" });
+  }
+};
