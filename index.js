@@ -6,6 +6,8 @@ import OtpRouter from "./routes/otp.js";
 import AuthRouter from "./routes/auth.js";
 import UserRouter from "./routes/user.js";
 import BlogRouter from "./routes/blog.js";
+import faqRouter from "./routes/faq.js";
+import courseRouter from "./routes/course.js";
 import YAML from "yamljs";
 import swaggerUi from "swagger-ui-express";
 
@@ -23,6 +25,8 @@ app.use("/api/otp", OtpRouter);
 app.use("/api/auth", AuthRouter);
 app.use("/api/user", UserRouter);
 app.use("/api/blog", BlogRouter);
+app.use("/api/faq", faqRouter);
+app.use("/api/course", courseRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 mongoose.connect(mongo_uri).then(() => {
