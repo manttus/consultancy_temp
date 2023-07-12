@@ -102,26 +102,28 @@ export const oauth = async (req, res) => {
   if (!token) {
     return res.status(400).send({ message: "Bad Request" })
   }
-  const response = await axios.post("https://oauth2.googleapis.com/tokeninfo", {
-    id_token: token
+  const response = await fetch("https://oauth2.googleapis.com/tokeninfo", {
+    method: "POST",
+    body: JSON.stringify({ id_token: token })
   })
-  // const data = response.data
-  // if (data) {
-  //   return res.status(400).send({ message: "Bad Request" })
-  // }
+  //   id_token: token
+  const data = await response.json()
+  if (data.error) {
+    return res.status(400).send({ message: "Bad Request" })
+  }
   try {
-    const user = await User.findOne({ email: response.email });
+    const user = await User.findOne({ email: data.email });
     if (!user) {
       return res.status(400).send({ message: "Invalid User" });
     }
     const accessToken = generateToken(
       process.env.ACCESS_TOKEN_SECRET,
-      email,
+      data.email,
       "1m"
     );
     const refreshToken = generateToken(
       process.env.REFRESH_TOKEN_SECRET,
-      email,
+      data.email,
       "5m"
     );
     return res
