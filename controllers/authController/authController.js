@@ -105,12 +105,12 @@ export const oauth = async (req, res) => {
   const response = await axios.post("https://oauth2.googleapis.com/tokeninfo", {
     id_token: token
   })
-  const data = response.data
-  if (data) {
-    return res.status(400).send({ message: "Bad Request" })
-  }
+  // const data = response.data
+  // if (data) {
+  //   return res.status(400).send({ message: "Bad Request" })
+  // }
   try {
-    const user = await User.findOne({ email: data.email });
+    const user = await User.findOne({ email: response.email });
     if (!user) {
       return res.status(400).send({ message: "Invalid User" });
     }
