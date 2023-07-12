@@ -11,12 +11,29 @@ import locationRouter from "./routes/location.js";
 import courseRouter from "./routes/course.js";
 import YAML from "yamljs";
 import swaggerUi from "swagger-ui-express";
+import cronJobs from "./controllers/cron/cronJobs.js";
+import { Server } from "socket.io";
+import http from "http";
 
 dotenv.config();
 
 const port = process.env.PORT;
 const mongo_uri = process.env.MONGO_URI;
 const app = express();
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+})
+
+io.on("connection", (socket) => {
+  const { notification } = cronJobs(socket);
+  notification();
+  console.log("connected")
+})
 
 const swaggerDocument = YAML.load("./documentation.yaml");
 
@@ -31,6 +48,8 @@ app.use("/api/course", courseRouter);
 app.use("/api/location", locationRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+
+
 mongoose.connect(mongo_uri).then(() => {
   console.log({ message: "Connected to MongoDB" });
 });
@@ -41,4 +60,8 @@ app.use("/api", (req, res) => {
 
 app.listen(port, () => {
   console.log({ message: "Server Started" });
+});
+
+server.listen(3002, () => {
+  console.log(`Listening to port ${3002}`);
 });

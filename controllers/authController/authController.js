@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import User from "../../model/user.js";
 import { generateToken } from "../../helper/generateToken.js";
+import axios from "axios";
 
 export const regenerate = async (req, res) => {
   const { token } = req.body;
@@ -95,3 +96,40 @@ export const login = async (req, res) => {
     return res.status(500).send({ message: "Server Error" });
   }
 };
+
+export const oauth = async (req, res) => {
+  const { token } = req.body;
+  if (!token) {
+    return res.status(400).send({ message: "Bad Request" })
+  }
+  const response = await axios.post("https://oauth2.googleapis.com/tokeninfo", {
+    id_token: token
+  })
+  const data = response.data
+  if (data) {
+    return res.status(400).send({ message: "Bad Request" })
+  }
+  try {
+    const user = await User.findOne({ email: data.email });
+    if (!user) {
+      return res.status(400).send({ message: "Invalid User" });
+    }
+    const accessToken = generateToken(
+      process.env.ACCESS_TOKEN_SECRET,
+      email,
+      "1m"
+    );
+    const refreshToken = generateToken(
+      process.env.REFRESH_TOKEN_SECRET,
+      email,
+      "5m"
+    );
+    return res
+      .status(200)
+      .send({ message: "Login Successful", accessToken, refreshToken });
+  } catch (err) {
+    return res.status(500).send({ message: "Server Error" });
+  }
+
+
+}
