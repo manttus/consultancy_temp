@@ -109,7 +109,7 @@ export const oauth = async (req, res) => {
   //   id_token: token
   const data = await response.json()
   if (data.error) {
-    return res.status(400).send({ message: "Bad Request" })
+    return res.status(400).send({ message: data.error })
   }
   try {
     const user = await User.findOne({ email: data.email });
