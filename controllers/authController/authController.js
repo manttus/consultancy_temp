@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../../model/user.js";
 import { generateToken } from "../../helper/generateToken.js";
 import axios from "axios";
+import fetch from "node-fetch";
 
 export const regenerate = async (req, res) => {
   const { token } = req.body;
