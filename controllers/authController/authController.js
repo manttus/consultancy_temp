@@ -99,6 +99,7 @@ export const login = async (req, res) => {
 
 export const oauth = async (req, res) => {
   const { token } = req.body;
+  console.log(token)
   if (!token) {
     return res.status(400).send({ message: "Bad Request" })
   }
